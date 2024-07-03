@@ -1,0 +1,22 @@
+#!/bin/sh
+java -Dapp.env="$APP_ENV" \
+    -Duser.timezone="Asia/Seoul" \
+    -Djava.net.preferIPv4Stack=true \
+    -Djava.net.preferIPv4Addresses \
+    -Dfile.encoding=utf-8
+    -Dspring.profiles.active="$PROFILE" \
+    -jar ./build/libs/kamaiio-modules-api-0.0.1-SNAPSHOT.jar \
+    -Xms1g \
+    -Xmx3g \
+    -XX:+UseConcMarkSweepGC \
+    -XX:+UseParNewGC \
+    -XX:+CMSParallelRemarkEnabled \
+    -XX:+AllowRedefinitionToAddDeleteMethods \
+    -XX:CMSInitiatingOccupancyFraction=80 \
+    -XX:+CMSClassUnloadingEnabled \
+    -XX:+DisableExplicitGC \
+    -verbose:gc \
+    -XX:+PrintGCDetails \
+    -XX:+PrintGCTimeStamps \
+    -XX:+PrintHeapAtGC \
+    -Xloggc:./logs/gc.log.$(date +%Y-%m-%d-%H-%M)

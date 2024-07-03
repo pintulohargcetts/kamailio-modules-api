@@ -1,0 +1,99 @@
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <contextName>${app.name}</contextName>
+    <property scope="context" name="ioLogType" value="spring-boot"/>
+
+    <!-- Console Log Pattern -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d[${app.name}][%p][%t][%F:%L:%M]%m%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Access Log Pattern -->
+    <appender name="RollingAccessLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${app.base}/logs/${app.name}-access.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${app.base}/logs/${app.name}-access.log.%d{yyyy-MM-dd}_%i</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Debug Log Pattern -->
+    <appender name="RollingDebugLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${app.base}/logs/${app.name}-debug.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${app.base}/logs/${app.name}-debug.log.%d{yyyy-MM-dd}_%i</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d[${app.name}][%p][%t]%m%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- IO Log Pattern -->
+    <appender name="RollingIOLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${app.base}/logs/${app.name}-io.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${app.base}/logs/${app.name}-io.log.%d{yyyy-MM-dd}_%i</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d[${app.name}]%m%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- AsyncAppender -->
+    <appender name="debug-async" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="RollingDebugLogFile"/>
+        <queueSize>1</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+        <includeCallerData>false</includeCallerData>
+        <neverBlock>false</neverBlock>
+    </appender>
+
+    <appender name="io-async" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="RollingIOLogFile"/>
+        <queueSize>1</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+        <includeCallerData>false</includeCallerData>
+        <neverBlock>false</neverBlock>
+    </appender>
+
+    <appender name="access-async" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="RollingAccessLogFile"/>
+        <queueSize>1</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+        <includeCallerData>false</includeCallerData>
+        <neverBlock>false</neverBlock>
+    </appender>
+
+
+    <!-- Logger -->
+    <logger name="reactor.netty.http.server.AccessLog" level="INFO" additivity="false">
+        <appender-ref ref="access-async"/>
+    </logger>
+
+    <logger name="com.plohar.kamailio.api.${app.name}" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="debug-async"/>
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="IO" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="io-async"/>
+    </logger>
+
+    <root>
+        <level value="INFO"/>
+        <appender-ref ref="debug-async"/>
+        <appender-ref ref="console"/>
+    </root>
+</configuration>

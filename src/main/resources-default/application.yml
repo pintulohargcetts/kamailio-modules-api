@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: kamailio-module-api
+  pid:
+    file: ${app.base:.}/${spring.application.name}.pid
+  profiles:
+    active: default
+  r2dbc:
+    url: r2dbc:mysql://127.0.0.1:3306/kamailio?verifyServerCertificate=false&useSSL=true&autoReconnect=true&serverTimezone=Asia/Seoul
+    username: root
+    password: Test.123!
+    r2dbc:
+      connection-factory:
+        configuration:
+          host: 127.0.0.1
+          port: 3306
+          user: root
+          password: Test.123!
+          database: kamailio
+    datasource:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/kamailio
+      username: root
+      password: Test.123!
+    jpa:
+      hibernate:
+        ddl-auto: none
+
+
+
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui/index.html
+
+logging:
+  level:
+    com.fasterxml.jackson.databind: DEBUG
+    reactor.netty.http.client: INFO
+    org.springframework: INFO
+server:
+  port: 6073
+  error:
+    whitelabel:
+      enabled: false
+  shutdown: graceful
+  forward-headers-strategy: framework
+  netty:
+    idle-timeout: 15000 # 15 second of idle-timeout
