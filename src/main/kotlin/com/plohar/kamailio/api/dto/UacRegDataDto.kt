@@ -36,19 +36,19 @@ package com.plohar.kamailio.api.dto
  * @property socket
  */
 class UacRegDataDto(
-        val lUuid: String,
-        val lUsername: String,
-        val lDomain: String,
-        val rUsername: String,
-        val rDomain: String,
-        val realm: String,
-        val authUsername: String,
-        val authPassword: String,
-        val authHa1: String,
-        val authProxy: String,
-        val expires: Int,
-        val flags: Int,
-        val regDelay: Int,
-        val contactAddr: String,
-        val socket: String, // Constructors, getters, and setters
+    val lUuid: String,
+    val lUsername: String,
+    val lDomain: String,
+    val rUsername: String,
+    val rDomain: String,
+    val realm: String,
+    val authUsername: String,
+    val authPassword: String,
+    val authHa1: String,
+    val authProxy: String,
+    val expires: Int,
+    val flags: Int,
+    val regDelay: Int,
+    val contactAddr: String,
+    val socket: String, // Constructors, getters, and setters
 )

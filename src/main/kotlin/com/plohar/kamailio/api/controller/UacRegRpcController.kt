@@ -33,7 +33,7 @@ import reactor.core.publisher.Mono
 @RestController
 @RequestMapping("/v1/uac/rpc")
 class UacRegRpcController(
-        private val uacRegRpcService: UacRegRpcService
+    private val uacRegRpcService: UacRegRpcService
 ) {
 
     @PostMapping("/refresh")

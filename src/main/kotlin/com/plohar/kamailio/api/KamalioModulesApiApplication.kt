@@ -37,12 +37,12 @@ import java.io.IOException
 @SpringBootApplication
 @EnableR2dbcRepositories
 @OpenAPIDefinition(
-        info = Info(
-                title = "Kamailio-Module-API", version = "1.0.0", description = "module-apis"
-        )
+    info = Info(
+        title = "Kamailio-Module-API", version = "1.0.0", description = "module-apis"
+    )
 )
 class KamailioModulesApiApplication(
-        @Value(value = "\${spring.pid.file}") val pid: String
+    @Value(value = "\${spring.pid.file}") val pid: String
 ) : BaseContext() {
     @Autowired
     lateinit var ctx: ApplicationContext

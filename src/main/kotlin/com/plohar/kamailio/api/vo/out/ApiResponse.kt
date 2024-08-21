@@ -15,7 +15,9 @@
 
 package com.plohar.kamailio.api.vo.out
 
+import java.util.*
+
 data class ApiResponse<T>(
-        val transactionId: String,
-        val data: T
+    val transactionId: String? = UUID.randomUUID().toString(),
+    val data: T
 )

@@ -16,6 +16,7 @@
 package com.plohar.kamailio.api.util
 
 import com.plohar.kamailio.api.client.JsonRpcRequest
+import com.plohar.kamailio.api.vo.`in`.stats.StatsRpcInVo
 import com.plohar.kamailio.api.vo.`in`.uacreg.*
 
 /**
@@ -24,14 +25,17 @@ import com.plohar.kamailio.api.vo.`in`.uacreg.*
  * @constructor Create empty Json rpc request factory
  */
 interface JsonRpcRequestFactory {
+    // Uac module
     fun createUacRefreshRegRequest(uacRegRefreshRpcInVo: UacRegRpcRefreshInVo): JsonRpcRequest
     fun createUacRegInfoRequest(uacRegRpcRegInfo: UacRegRpcRegInfoInVo): JsonRpcRequest
     fun createUacRegEnableRequest(uacRegRpcRegEnableInVo: UacRegRpcRegEnableInVo): JsonRpcRequest
     fun createUacRegDisableRequest(uacRegRpcRegDisableInVo: UacRegRpcRegDisableInVo): JsonRpcRequest
     fun createUacRegUnregRequest(uacRegRpcRegUnregisterInVo: UacRegRpcRegUnregisterInVo): JsonRpcRequest
-
     fun createUacRegAddRequest(uacRegAddInVo: UacRegRpcAddInVo): JsonRpcRequest
     fun createUacRegRemove(uacRegRemoveRpcInVo: UacRegRpcRemoveInVo): JsonRpcRequest
+
+    // https://www.kamailio.org/docs/modules/stable/modules/kex.html
+    fun createStatsRequest(statsRpcInVo: StatsRpcInVo): JsonRpcRequest // core.aliases_list
 
     companion object {
         fun factory(): JsonRpcRequestFactory = DefaultJsonRpcRequestFactory()

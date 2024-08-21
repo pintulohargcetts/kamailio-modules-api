@@ -31,7 +31,7 @@ import reactor.core.publisher.Mono
  */
 @Service
 class UacRegDataService(
-        private val uacRegDAO: IUacRegDAO
+    private val uacRegDAO: IUacRegDAO
 ) {
 
     fun findAllUacRegs(): Flux<UacRegDataDto> = uacRegDAO.findAll().flatMap {
@@ -53,27 +53,27 @@ class UacRegDataService(
         val uacRegDto = uacRegInVo.toDTO()
 
         return uacRegDAO.findByLUuid(lUuid)
-                .flatMap { existingUacRegEntity ->
-                    // Update the existing entity fields
-                    val updatedUacReg = existingUacRegEntity.copy(
-                            lDomain = uacRegDto.lDomain,
-                            rDomain = uacRegDto.rDomain,
-                            realm = uacRegDto.realm,
-                            authUsername = uacRegDto.authUsername,
-                            authPassword = uacRegDto.authPassword,
-                            authHa1 = uacRegDto.authHa1,
-                            authProxy = uacRegDto.authProxy,
-                            expires = uacRegDto.expires,
-                            flags = uacRegDto.flags,
-                            regDelay = uacRegDto.regDelay,
-                            contactAddr = uacRegDto.contactAddr,
-                            socket = uacRegDto.socket
-                    )
-                    // Save the updated entity
-                    uacRegDAO.save(updatedUacReg).map {
-                        uacRegDto
-                    }
+            .flatMap { existingUacRegEntity ->
+                // Update the existing entity fields
+                val updatedUacReg = existingUacRegEntity.copy(
+                    lDomain = uacRegDto.lDomain,
+                    rDomain = uacRegDto.rDomain,
+                    realm = uacRegDto.realm,
+                    authUsername = uacRegDto.authUsername,
+                    authPassword = uacRegDto.authPassword,
+                    authHa1 = uacRegDto.authHa1,
+                    authProxy = uacRegDto.authProxy,
+                    expires = uacRegDto.expires,
+                    flags = uacRegDto.flags,
+                    regDelay = uacRegDto.regDelay,
+                    contactAddr = uacRegDto.contactAddr,
+                    socket = uacRegDto.socket
+                )
+                // Save the updated entity
+                uacRegDAO.save(updatedUacReg).map {
+                    uacRegDto
                 }
+            }
 
     }
 
@@ -81,42 +81,42 @@ class UacRegDataService(
 
     private fun convertEntityToDto(uacRegEntity: UacRegEntity): UacRegDataDto {
         return UacRegDataDto(
-                lUuid = uacRegEntity.lUuid,
-                lUsername = uacRegEntity.lUsername,
-                lDomain = uacRegEntity.lDomain,
-                rUsername = uacRegEntity.rUsername,
-                rDomain = uacRegEntity.rDomain,
-                realm = uacRegEntity.realm,
-                authUsername = uacRegEntity.authUsername,
-                authPassword = uacRegEntity.authPassword,
-                authHa1 = uacRegEntity.authHa1,
-                authProxy = uacRegEntity.authProxy,
-                expires = uacRegEntity.expires,
-                flags = uacRegEntity.flags,
-                regDelay = uacRegEntity.regDelay,
-                contactAddr = uacRegEntity.contactAddr,
-                socket = uacRegEntity.socket
+            lUuid = uacRegEntity.lUuid,
+            lUsername = uacRegEntity.lUsername,
+            lDomain = uacRegEntity.lDomain,
+            rUsername = uacRegEntity.rUsername,
+            rDomain = uacRegEntity.rDomain,
+            realm = uacRegEntity.realm,
+            authUsername = uacRegEntity.authUsername,
+            authPassword = uacRegEntity.authPassword,
+            authHa1 = uacRegEntity.authHa1,
+            authProxy = uacRegEntity.authProxy,
+            expires = uacRegEntity.expires,
+            flags = uacRegEntity.flags,
+            regDelay = uacRegEntity.regDelay,
+            contactAddr = uacRegEntity.contactAddr,
+            socket = uacRegEntity.socket
         )
     }
 
 
     private fun convertDtoToEntity(uacRegDto: UacRegDataDto): UacRegEntity {
         return UacRegEntity(
-                lUuid = uacRegDto.lUuid,
-                lUsername = uacRegDto.lUsername,
-                lDomain = uacRegDto.lDomain,
-                rUsername = uacRegDto.rUsername,
-                rDomain = uacRegDto.rDomain,
-                realm = uacRegDto.realm,
-                authUsername = uacRegDto.authUsername,
-                authPassword = uacRegDto.authPassword,
-                authHa1 = uacRegDto.authHa1,
-                authProxy = uacRegDto.authProxy,
-                expires = uacRegDto.expires,
-                flags = uacRegDto.flags,
-                regDelay = uacRegDto.regDelay,
-                contactAddr = uacRegDto.contactAddr,
-                socket = uacRegDto.socket
+            lUuid = uacRegDto.lUuid,
+            lUsername = uacRegDto.lUsername,
+            lDomain = uacRegDto.lDomain,
+            rUsername = uacRegDto.rUsername,
+            rDomain = uacRegDto.rDomain,
+            realm = uacRegDto.realm,
+            authUsername = uacRegDto.authUsername,
+            authPassword = uacRegDto.authPassword,
+            authHa1 = uacRegDto.authHa1,
+            authProxy = uacRegDto.authProxy,
+            expires = uacRegDto.expires,
+            flags = uacRegDto.flags,
+            regDelay = uacRegDto.regDelay,
+            contactAddr = uacRegDto.contactAddr,
+            socket = uacRegDto.socket
         )
     }
 }

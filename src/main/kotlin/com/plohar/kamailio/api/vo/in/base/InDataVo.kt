@@ -16,7 +16,7 @@
 package com.plohar.kamailio.api.vo.`in`.base
 
 abstract class InDataVo<T>(
-        open val transactionId: String?,
+    open val transactionId: String?,
 ) {
     companion object {
         private const val serialVersionUID = 202304060030700L

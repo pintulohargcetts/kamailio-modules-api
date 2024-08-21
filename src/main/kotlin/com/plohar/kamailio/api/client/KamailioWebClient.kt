@@ -25,20 +25,20 @@ import reactor.core.publisher.Mono
 
 @Component
 class KamailioWebClient(
-        private val webClient: WebClient,
+    private val webClient: WebClient,
 ) : BaseContext() {
     fun jsonRpcRequest(jsonRpcRequest: JsonRpcRequest): Mono<ResponseEntity<JsonRpcResponse>> {
         return webClient.post()
-                .uri(jsonRpcRequest.serverEndPoint!! + "/rpc")
-                .header("Content-Type", "application/json")
-                .bodyValue(convertToJson(jsonRpcRequest))
-                .retrieve()
-                .bodyToMono(JsonRpcResponse::class.java)
-                .map {
-                    ResponseEntity.ok(it)
-                }.onErrorResume(WebClientResponseException::class.java) {
-                    Mono.just(ResponseEntity.ok(it.getResponseBodyAs(JsonRpcResponse::class.java)))
-                }
+            .uri(jsonRpcRequest.serverEndPoint + "/rpc")
+            .header("Content-Type", "application/json")
+            .bodyValue(convertToJson(jsonRpcRequest))
+            .retrieve()
+            .bodyToMono(JsonRpcResponse::class.java)
+            .map {
+                ResponseEntity.ok(it)
+            }.onErrorResume(WebClientResponseException::class.java) {
+                Mono.just(ResponseEntity.ok(it.getResponseBodyAs(JsonRpcResponse::class.java)))
+            }
     }
 
     fun convertToJson(request: JsonRpcRequest): String {

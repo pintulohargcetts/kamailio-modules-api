@@ -42,32 +42,32 @@ import org.springframework.data.relational.core.mapping.Table
  */
 @Table("uacreg")
 data class UacRegEntity(
-        @Id val id: Long = 0,
-        @Column("l_uuid")
-        val lUuid: String,
-        @Column("l_username")
-        var lUsername: String,
-        @Column("l_domain")
-        var lDomain: String,
-        @Column("r_username")
-        var rUsername: String,
-        @Column("r_domain")
-        var rDomain: String,
-        @Column("realm")
-        var realm: String,
-        @Column("auth_username")
-        var authUsername: String,
-        @Column("auth_password")
-        var authPassword: String,
-        @Column("auth_ha1")
-        var authHa1: String,
-        @Column("auth_proxy")
-        var authProxy: String,
-        var expires: Int,
-        var flags: Int,
-        @Column("reg_delay")
-        var regDelay: Int,
-        @Column("contact_addr")
-        var contactAddr: String,
-        var socket: String
+    @Id val id: Long = 0,
+    @Column("l_uuid")
+    val lUuid: String,
+    @Column("l_username")
+    var lUsername: String,
+    @Column("l_domain")
+    var lDomain: String,
+    @Column("r_username")
+    var rUsername: String,
+    @Column("r_domain")
+    var rDomain: String,
+    @Column("realm")
+    var realm: String,
+    @Column("auth_username")
+    var authUsername: String,
+    @Column("auth_password")
+    var authPassword: String,
+    @Column("auth_ha1")
+    var authHa1: String,
+    @Column("auth_proxy")
+    var authProxy: String,
+    var expires: Int,
+    var flags: Int,
+    @Column("reg_delay")
+    var regDelay: Int,
+    @Column("contact_addr")
+    var contactAddr: String,
+    var socket: String
 )

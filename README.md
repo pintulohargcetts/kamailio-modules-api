@@ -3,7 +3,7 @@
 # Kamailio REST API (RPC and DB)
 
 This repository exposes Kamailio's DB and RPC functionalities via REST APIs. Currently, it covers operations related to
-the UAC module, allowing in memory management of UAC records for remote registration.
+the UAC module - allowing in memory management of UAC records for remote registration, stats api etcs.
 
 ## RPC exposed as REST API
 
@@ -32,6 +32,7 @@ for example
 - **Remove API:** Use this API to remove UAC records.
 - **Info API:** Use this API to retrieve UAC records.
 - **etcs....**
+- **stats....**
 
 
 ## Prerequisites

@@ -16,9 +16,9 @@
 package com.plohar.kamailio.api.vo.`in`.base
 
 abstract class InRpcVo<T>(
-        open val transactionId: String,
-        open val id: String,
-        open val serverUrl: String,
+    open val transactionId: String?,
+    open val id: String,
+    open val serverUrl: String,
 ) {
     companion object {
         private const val serialVersionUID = 202304060030700L

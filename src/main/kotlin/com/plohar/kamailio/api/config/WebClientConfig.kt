@@ -29,8 +29,8 @@ class WebClientConfig {
     @Bean
     fun webClient(): WebClient {
         return WebClient.builder()
-                .filter(logRequest())
-                .build()
+            .filter(logRequest())
+            .build()
     }
 
     private fun logRequest(): ExchangeFilterFunction {

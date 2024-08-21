@@ -30,7 +30,7 @@ import reactor.core.publisher.Mono
  */
 @Service
 class UacRegRpcService(
-        private val kamailioWebClient: KamailioWebClient
+    private val kamailioWebClient: KamailioWebClient
 ) {
     fun info(uacRegRpcRegInfoInVo: UacRegRpcRegInfoInVo): Mono<ResponseEntity<JsonRpcResponse>> {
         return kamailioWebClient.jsonRpcRequest(uacRegRpcRegInfoInVo.toJsonRpc())

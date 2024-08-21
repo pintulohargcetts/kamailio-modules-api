@@ -58,7 +58,7 @@ class UacRegDataController(private val uacRegService: UacRegDataService) {
 
     @PutMapping
     fun updateUacReg(
-            @RequestBody uacRegInVo: UacRegDataInVo
+        @RequestBody uacRegInVo: UacRegDataInVo
     ): Mono<ApiResponse<UacRegDataDto>> {
         return uacRegService.updateUacReg(uacRegInVo.luuid, uacRegInVo).map {
             ApiResponse(uacRegInVo.transactionId, it)

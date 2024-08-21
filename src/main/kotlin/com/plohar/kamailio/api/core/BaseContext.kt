@@ -36,8 +36,8 @@ open class BaseContext {
 
     init {
         objectMapper
-                .registerModule(JavaTimeModule())
-                .registerModule(ParameterNamesModule())
+            .registerModule(JavaTimeModule())
+            .registerModule(ParameterNamesModule())
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
         objectMapper.dateFormat = StdDateFormat()
     }

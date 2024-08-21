@@ -18,11 +18,9 @@ import com.fasterxml.jackson.annotation.JsonInclude
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 data class JsonRpcRequest(
-        val jsonrpc: String = "2.0",
-        val method: String,
-        val params: List<Any>,
-        val id: String,
-        val serverEndPoint: String
-) {
-
-}
+    val jsonrpc: String = "2.0",
+    val method: String,
+    val params: List<Any>,
+    val id: String,
+    val serverEndPoint: String
+)

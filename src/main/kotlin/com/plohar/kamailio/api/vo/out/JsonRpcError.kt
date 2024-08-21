@@ -21,6 +21,6 @@ import com.fasterxml.jackson.annotation.JsonInclude
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 class JsonRpcError(
-        val code: Int?,
-        val message: String
+    val code: Int?,
+    val message: String
 )

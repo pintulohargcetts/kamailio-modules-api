@@ -29,7 +29,7 @@ import reactor.core.publisher.Mono
  */
 @Component
 class UacRegDao(
-        private val uacRegRespository: UacRegRepository
+    private val uacRegRespository: UacRegRepository
 ) : IUacRegDAO {
 
     override fun findByLUuid(lUuid: String): Mono<UacRegEntity> {

@@ -22,12 +22,12 @@ import com.fasterxml.jackson.annotation.JsonProperty
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class JsonRpcResponse(
-        @JsonProperty("result")
-        val result: Object?, // Adjust this based on your JSON-RPC response structure
+    @JsonProperty("result")
+    val result: Object?, // Adjust this based on your JSON-RPC response structure
 
-        @JsonProperty("id")
-        val id: String,
+    @JsonProperty("id")
+    val id: String,
 
-        @JsonProperty("error")
-        val error: JsonRpcError?
+    @JsonProperty("error")
+    val error: JsonRpcError?
 )

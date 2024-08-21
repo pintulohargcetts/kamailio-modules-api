@@ -16,6 +16,7 @@
 
 package com.plohar.kamailio.api.util
 
+import com.plohar.kamailio.api.vo.`in`.stats.StatsRpcInVo
 import com.plohar.kamailio.api.vo.`in`.uacreg.UacRegRpcAddInVo
 import com.plohar.kamailio.api.vo.`in`.uacreg.UacRegRpcRefreshInVo
 import com.plohar.kamailio.api.vo.`in`.uacreg.UacRegRpcRegEnableInVo
@@ -41,6 +42,9 @@ class DefaultJsonRpcRequestFactoryTest : StringSpec({
 
     @MockK
     lateinit var uacRegAddInVo: UacRegRpcAddInVo
+
+    @MockK
+    lateinit var statsRpcInVo: StatsRpcInVo
 
     // Initializing the factory
     val factory = DefaultJsonRpcRequestFactory()
@@ -122,22 +126,79 @@ class DefaultJsonRpcRequestFactoryTest : StringSpec({
         result.serverEndPoint shouldBe "http://example.com"
         result.id shouldBe "1"
         result.params shouldBe listOf(
-                "04011110000",
-                "N1234",
-                ".",
-                "test",
-                "30",
-                "0",
-                "0",
-                "0",
-                "0",
-                "test",
-                60,
-                0,
-                30,
-                "sip:172.27.0.10:6060",
-                "172.27.0.10:6060"
+            "04011110000",
+            "N1234",
+            ".",
+            "test",
+            "30",
+            "0",
+            "0",
+            "0",
+            "0",
+            "test",
+            60,
+            0,
+            30,
+            "sip:172.27.0.10:6060",
+            "172.27.0.10:6060"
         )
+    }
+
+
+    "createStatsRequest should create valid JsonRpcRequest base on type of stats" {
+        statsRpcInVo = mockk()
+        every { statsRpcInVo.serverUrl } returns "http://example.com"
+        every { statsRpcInVo.id } returns "2"
+        every { statsRpcInVo.statsType } returns StatsRpcInVo.StatsType.STATS_FETCH
+
+        var result = factory.createStatsRequest(statsRpcInVo)
+        result.method shouldBe Method.STATS_FETCH
+        result.id shouldBe "2"
+        result.serverEndPoint shouldBe "http://example.com"
+
+
+        every { statsRpcInVo.statsType } returns StatsRpcInVo.StatsType.CORE_ALIASES_LIST
+        result = factory.createStatsRequest(statsRpcInVo)
+        result.method shouldBe Method.CORE_ALIASES_LIST
+
+        every { statsRpcInVo.statsType } returns StatsRpcInVo.StatsType.STATS_GET_STATISTICS
+        result = factory.createStatsRequest(statsRpcInVo)
+        result.method shouldBe Method.STATS_GET_STATISTICS
+        result.params.size shouldBe 1
+        result.params[0].toString() shouldBe "all"
+
+        every { statsRpcInVo.statsType } returns StatsRpcInVo.StatsType.STATS_FETCH
+        result = factory.createStatsRequest(statsRpcInVo)
+        result.method shouldBe Method.STATS_FETCH
+        result.params.size shouldBe 1
+        result.params[0].toString() shouldBe "all"
+
+        every { statsRpcInVo.statsType } returns StatsRpcInVo.StatsType.STATS_FETCHN
+        result = factory.createStatsRequest(statsRpcInVo)
+        result.method shouldBe Method.STATS_FETCHN
+        result.params.size shouldBe 1
+        result.params[0].toString() shouldBe "all"
+
+        every { statsRpcInVo.statsType } returns StatsRpcInVo.StatsType.MOD_MEM_STATS
+        result = factory.createStatsRequest(statsRpcInVo)
+        result.method shouldBe Method.MOD_MEM_STATS
+        result.params.size shouldBe 2
+        result.params[0].toString() shouldBe "all"
+        result.params[1].toString() shouldBe "all"
+
+        every { statsRpcInVo.statsType } returns StatsRpcInVo.StatsType.MOD_STATS
+        result = factory.createStatsRequest(statsRpcInVo)
+        result.method shouldBe Method.MOD_STATS
+        result.params.size shouldBe 2
+        result.params[0].toString() shouldBe "all"
+        result.params[1].toString() shouldBe "all"
+
+        every { statsRpcInVo.statsType } returns StatsRpcInVo.StatsType.MOD_MEM_STATSX
+        result = factory.createStatsRequest(statsRpcInVo)
+        result.method shouldBe Method.MOD_MEM_STATSX
+        result.params.size shouldBe 2
+        result.params[0].toString() shouldBe "all"
+        result.params[1].toString() shouldBe "all"
     }
 
     // Add more test cases for other factory methods as needed
